@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    
+    <title>Manage Permission</title>
+    <style>
+   
+        .checkbox-container {
+    display:inline ;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-left: 30px; /* Adjust this value to change the checkbox's position */
+    margin-bottom: 0px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Hide the default checkbox */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px; /* Set the height and width to your desired size */
+    width: 20px;
+    background-color: #eee; /* Background color of the checkbox */
+    border: 1px solid #ccc; /* Border color of the checkbox */
+}
+
+/* Style the custom checkbox when it's checked */
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #2196F3; /* Background color when checked */
+}
+
+/* Create a checkmark/indicator (the white box inside the checkbox) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when the checkbox is checked */
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+    left: 7px; /* Adjust this value to position the checkmark inside the checkbox */
+    top: 3px; /* Adjust this value to position the checkmark inside the checkbox */
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+/*  */
+/*  */
+        .centered-text {
+            text-align: center;
+}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    {% comment %} {% include 'permissions_collapse.html' %} {% endcomment %}
+    <div id="headerContainer">
+        {% if is_desktop %}
+              {% include 'library/header_desktop.html' %}
+          {% else %}
+              {% include 'library/header_mobile.html' %}
+          {% endif %}
+      </div>
+    
+
+    {% comment %}  {% endcomment %}
+
+
+
+    
+
+
+
+   
+    
+
+
+    {% comment %}  {% endcomment %}
+    <div class="card p-3 mt-3 custom-form center" style="max-width: 97%; outline: 2px solid #650070; margin: auto; display: table;">
+        <div class="" style="display: flex; background-color: #650070; color: aliceblue; width: 100%; font-weight: bold; height: 40px; align-items: center;">
+            <span>&nbsp;&nbsp; <span style="color:coral;text-shadow: none;"> {{user.username}}</span> : User Permissions </span>
+            <span>&nbsp;&nbsp;|</span>
+            <span><a class="navbar-brand btn" style="font-weight: bold; margin-left: 20px; width: auto; color: #ffffff;" href="/active_users"> <i class="bi bi-plus-square-fill"></i> Back to User Management</a></span>
+        </div>
+        <form class="card p-3 mt-2 custom-form" method="post" autocomplete="off">
+            {% csrf_token %}
+            <table style="width: fit-content; text-align-last: center;border:#650070 solid 2px">
+                <thead>
+                    <tr>
+                        <th>View Permissions</th>
+                        <th>Add Permissions</th>
+                        <th>Edit Permissions</th>
+                        <th>Delete Permissions</th>
+                    </tr>
+                </thead>
+                <tbody style="border:#650070 2px solid">
+                    {% comment %} City Master {% endcomment %}
+                    <tr>
+                        <td class="centered-text" colspan="4">
+                            <div class="" style="display: flex; background-color: #ffffff; color: #650070; width: 100%; font-weight: bold;align-items: center;">
+                          Main Master - City Master  </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;">
+                            <label class="checkbox-container">View City Master
+                                <input type="checkbox" name="permissions" value="view_citymaster" {% if view_citymaster_perm %}checked{% endif %}>
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                             <label class="checkbox-container"> Add City Master
+                                <input type="checkbox" name="permissions" value="add_citymaster" {% if add_citymaster_perm %}checked{% endif %}>
+                            
+                               <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                             <label class="checkbox-container">
+                                <input type="checkbox" name="permissions" value="change_citymaster" {% if change_citymaster_perm %}checked{% endif %}>
+                                Edit City Master
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                        <td>
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="permissions" value="delete_citymaster" {% if delete_citymaster_perm %}checked{% endif %}>
+                                Delete City Master
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                    </tr>
+{% comment %}  {% endcomment %}
+
+ {% comment %} City Master {% endcomment %}
+ <tr>
+    <td class="centered-text" colspan="4">
+        <div class="" style="display: flex; background-color: #ffffff; color: #650070; width: 100%; font-weight: bold;align-items: center;">
+      Main Master - Broker Master  </div>
+    </td>
+</tr>
+<tr>
+    <td style="text-align: center;">
+        <label class="checkbox-container">View Broker Master
+            <input type="checkbox" name="permissions" value="view_brokermaster" {% if view_brokermaster_perm %}checked{% endif %}>
+            <span class="checkmark"></span>
+        </label>
+    </td>
+    <td>
+         <label class="checkbox-container"> Add Broker Master
+            <input type="checkbox" name="permissions" value="add_brokermaster" {% if add_brokermaster_perm %}checked{% endif %}>
+        
+           <span class="checkmark"></span>
+        </label>
+    </td>
+    <td>
+         <label class="checkbox-container">
+            <input type="checkbox" name="permissions" value="change_brokermaster" {% if change_brokermaster_perm %}checked{% endif %}>
+            Edit Broker Master
+            <span class="checkmark"></span>
+        </label>
+    </td>
+    <td>
+        <label class="checkbox-container">
+            <input type="checkbox" name="permissions" value="delete_brokermaster" {% if delete_brokermaster_perm %}checked{% endif %}>
+            Delete Broker Master
+            <span class="checkmark"></span>
+        </label>
+    </td>
+</tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <tr>
+                        <td colspan="4">
+                            <button class="btn btn-primary" type="submit">Grant Permissions</button>
+                            <label class="btn-warning btn" for="cc"><input type="checkbox" id="cc" onclick="javascript:checkAll(this)"/>Check All
+                                <!-- <span class="checkmark"></span> -->
+                            </label>
+                        </td>
+                    </tr>
+                    
+                    {% comment %} City End {% endcomment %}
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </tbody>
+            </table>
+            <div class="row">
+                
+            </div>
+        </form>
+    </div>
+    <h1>Grant Permission to {{ user.username }}</h1>
+    {% if user.user_permissions.all %}
+    <h3>Current Permissions:</h3>
+    <ul>
+        {% for permission in user.user_permissions.all %}
+        <li>{{ permission }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+
+</body>
+<script>
+    function checkAll(o) {
+        var boxes = document.getElementsByTagName("input");
+        for (var x = 0; x < boxes.length; x++) {
+            var obj = boxes[x];
+            if (obj.type == "checkbox") {
+                if (obj.name != "check")
+                    obj.checked = o.checked;
+            }
+        }
+    }
+</script>
+</html>
+<form class="card p-3 mt-2 custom-form" method="post" autocomplete="off">
+    {% csrf_token %}
+    <table style="width: fit-content; text-align-last: center;border:#650070 solid 2px">
+        <thead>
+            <tr>
+                <th>Permission</th>
+                <th>Grant</th>
+            </tr>
+        </thead>
+        <tbody style="border:#650070 2px solid">
+            {% for permission in all_permissions %}
+            <tr>
+                <td>{{ permission.name }}</td>
+                <td>
+                    <label class="checkbox-container">{{ permission.codename }}
+                        <input type="checkbox" name="permissions" value="{{ permission.codename }}" {% if permission.codename in vrinda_permissions %}checked{% endif %}>
+                        <span class="checkmark"></span>
+                    </label>
+                </td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="2">
+                    <button class="btn btn-primary" type="submit">Save Permissions</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+

@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    {% load static %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,300;1,400&family=Montserrat:wght@100&family=Poppins:ital,wght@0,100;1,100&family=Roboto:wght@100;300&family=Zen+Antique&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ganesh LMS</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+  <body align="left" style="align:left;">
+
+    <div class="">
+  <div class="row">
+    <div class="col-7" style="margin:0px;padding:0px;">
+      <div align="left" class="col" style="font-family: 'Lato', sans-serif;font-size:30px; color:;padding-left: 20px;">
+      
+          <i class="bi bi-align-bottom"></i>
+      Task
+
+
+  </div>
+    </div>
+
+      <div align="right" class="col" style="padding-top:20px;">
+<b>
+
+  </b>         </div>
+
+
+  </div>
+</div>
+    <!-- font-family: 'Lato', sans-serif;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Poppins', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Zen Antique', serif; -->
+
+
+
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container left">
+
+{% if user.is_superuser %}
+          <a class="navbar-brand btn bi bi-house text-white" href="/dashboard" > Dashboard</a>
+{% else %}
+<a class="navbar-brand btn bi bi-house text-white" href="/" > Home</a>
+
+{% endif %}
+
+{% if not user.is_superuser %}
+  <a class="navbar-brand btn bi bi-house text-white" href="/user_data" > View Customer</a>
+          
+{% endif %}
+          {% if not user.is_superuser %}
+          <a class="navbar-brand btn bi bi-house text-white" href="/form" > Add Customer</a>
+          {% endif %}
+           
+           
+
+
+
+        
+
+
+        </ul>
+        {% if user.is_authenticated %}
+
+
+              
+        <div class="" style="padding-right:50px;">
+          <ul class="navbar-nav me-auto">
+              <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle bi bi-person-circle  text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-size:20px ; color: black;">
+            {{user}}
+          </a>
+
+          <ul class="dropdown-menu">
+
+            <a class="dropdown-item navbar-brand bi bi-person-circle" href="/user_profile/{{user.id}}"> Profile</a>
+          
+            {% if user.is_superuser %}
+                    <a class="dropdown-item navbar-brand bi bi-bricks" href="super_users"> Super Users </a>
+                    <a class="dropdown-item navbar-brand bi bi-mouse" href="active_users"> Normal Users </a>
+                   {% endif %}
+
+       
+       
+            <a class="dropdown-item navbar-brand bi bi-box-arrow-right" href="{% url 'logout' %}"> Logout</a>
+
+
+      </ul>
+        </li>
+      </ul>
+      </div>
+   
+
+
+
+
+
+      {% else %}
+      <div class="width:200px;">
+<!--            <a class="navbar-brand btn bi bi-house bi bi-person-circle text-white" href="/accounts/login/?next=/"> Login</a>
+-->
+
+        <a class="navbar-brand btn bi bi-house bi bi-person-circle text-white" href="{% url 'loginadmin' %}"> Admin Login</a>
+        <a class="navbar-brand btn bi bi-house bi bi-person-circle text-white" href="{% url 'login' %}"> User Login</a>
+
+        <a class="navbar-brand btn bi bi-house bi bi-journal-check text-white" href="{% url 'register_user' %}">  Signup</a>
+
+
+        {% endif %}
+
+
+
+          </div>
+
+
+
+          </div>  {% if user.is_authenticated %}
+
+      
+
+
+
+
+            {% else %}
+           
+          
+            {% endif %}
+      </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+
+
+<div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {% include 'dashboard.html' %}
+
+
+
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+        {% if user.is_authenticated %}
+          <tr>
+            <th> User</th>
+            
+            <th>&nbsp&nbsp&nbsp Customers Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Contact Number</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            {% if user.is_authenticated %}
+            {% if update_permission %}
+            <th>Edit</th>
+            {% endif %}
+            {% endif %}
+            {% if user.is_superuser %}
+            <th>Update</th>
+            {% endif %}
+            {% if user.is_superuser %}
+          
+            <th>Delete</th>
+            {% endif %}
+
+          </tr>
+          {% endif %}
+        </thead>
+        <tbody>
+          
+          <!--{% for d in datas %}
+          <tr>
+            <th> &nbsp&nbsp User: {{d.dataaddedby}}</th>
+          </tr>
+          {% endfor %}
+        -->
+
+          {% for d in datas %}
+         
+          <tr>
+            <td>
+              <p class="fw-bold mb-1">{{d.dataaddedby}}</p>
+            </td>
+            <td>
+              <div class="d-flex align-items-center">
+               
+                <div class="ms-3">
+               
+                  <p class="fw-bold mb-1">{{d.c_name}}</p>
+
+                </div>
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{d.c_address}}</p>
+
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{d.c_email}}</p>
+            </td>
+            <td>
+                <p class="fw-normal mb-1">  {{d.c_mobile}}</p>
+
+            </td>
+            <td>
+                <p class="fw-normal mb-1">{{d.product_id}}</p>
+
+            </td>
+            <td>
+                <p class="fw-normal mb-1">{{d.product_name}}</p>
+            </td>
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}  <td>
+
+              <a class="bi bi-pencil btn btn-warning" href="/update/{{d.id}}" title="Edit"></a>
+
+
+            </td>{% endif %}
+            {% endif %}
+
+            {% if user.is_authenticated %}
+           
+            {% endif %}
+            {% if user.is_authenticated %}
+           
+            <td>
+
+              <a class="bi bi-trash btn btn-danger" href="delete/{{d.id}}" title="delete"></a>
+
+
+
+            </td>  
+            {% endif %}
+
+
+
+          </tr>
+
+
+{% endfor %}
+        </tbody>
+      </table>
+</div> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+
+</html>

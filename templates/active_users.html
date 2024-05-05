@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    {% load static %}
+  <style>
+    /*  */
+    
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .8s;
+      transition: .8s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked+.slider {
+      background-color:#383838;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>End Users</title>
+  
+</head>
+
+<body align="left" style="align:left;">
+  <div id="headerContainer">
+    {% if is_desktop %}
+          {% include 'library/header_desktop.html' %}
+      {% else %}
+          {% include 'library/header_mobile.html' %}
+      {% endif %}
+  </div>
+
+
+  <div align='center' class="card container mt-4 shadow p-3 mb-5 bg-white rounded" style="width:95%;font-size:14px;">
+    <div class="container">
+
+      <h2 class="mb-3 text-center">Users</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">User Management</th>
+            {% if user.is_authenticated %}
+            {% if user_change_permission %}
+            
+            <th scope="col">User Status</th>
+            {% endif %}{% endif %}
+            {% if user_change_permission %}
+            <th scope="col">User Permissions</th>
+            {% endif %}
+            <th scope="col">Delete</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in superuser_false %}
+          <tr>
+
+
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.username}}</td>
+            <td>{{user.first_name}}</td>
+            <td>{{user.last_name}}</td>
+            <td>{{user.email}}</td>
+            <td>
+              <a href="{% url 'userprof_update' user.id %}" class="btn btn-warning">Manage User</a>
+          </td>
+            {% if user.is_authenticated %}
+            {% if user_change_permission %}
+            <td>
+                
+              
+              {% if user.is_active %}
+              <a href="/deacivate_user/{{user.id}}" title="Deactivate User">
+              <i class="bi bi-unlock-fill btn btn-success"></i>
+            </a>
+              {% endif %}
+              {% if not user.is_active %}
+              <a href="/activate_user/{{user.id}}" title="Activate User" title="Activate User">
+              <i class="bi bi-lock-fill btn btn-danger"></i>
+              </a>
+              {% endif %}
+             
+            </td>  {% endif %} {% endif %} 
+            <td>
+
+              {% if user.citymaster %}
+              <a href="{% url 'update_user_permissions' user.citymaster.id %}" class="btn btn-primary">Change Permissions</a>
+              
+            {% else %}
+            
+            {% endif %}
+            <a href="{% url 'grant_permission' tid=user.id %}" class="btn btn-primary">Grant Permission</a>
+
+             
+              
+          </td>
+           
+            <td> <a href="/delete_user/{{user.id}}"> <i class="bi bi-trash3 btn btn-danger"></i> </a></td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+    crossorigin="anonymous"></script>
+
+
+
+
+
+
+    
+</body>
+
+</html>
+

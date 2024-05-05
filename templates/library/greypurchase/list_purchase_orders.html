@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Grey Purchase Order</title>
+    <!-- Add your CSS and Bootstrap links here -->
+</head>
+<body>
+    <h1>View Grey Purchase Order</h1>
+
+    <!-- Grey Purchase Order Details -->
+    <h2>Grey Purchase Order Details</h2>
+    <dl class="row">
+        <dt class="col-sm-4">Entry Number:</dt>
+        <dd class="col-sm-8">{{ purchase_order.entry_number }}</dd>
+
+        <dt class="col-sm-4">Entry Date:</dt>
+        <dd class="col-sm-8">{{ purchase_order.entry_date }}</dd>
+
+        <dt class="col-sm-4">Reference Number:</dt>
+        <dd class="col-sm-8">{{ purchase_order.ref_number }}</dd>
+
+        <!-- Add more fields as needed -->
+    </dl>
+
+    <!-- Grey Purchase Order Items -->
+    <h2>Grey Purchase Order Items</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Unit</th>
+                <th>Merchant</th>
+                <th>Design</th>
+                <th>Shade</th>
+                <th>Grade</th>
+                <th>PCS</th>
+                <th>Cut</th>
+                <th>Meters (Mtrs)</th>
+                <th>Rate</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in purchase_order_items %}
+            <tr>
+                <td>{{ item.order_id }}</td>
+                <td>{{ item.unit }}</td>
+                <td>{{ item.merchant }}</td>
+                <td>{{ item.design }}</td>
+                <td>{{ item.shade }}</td>
+                <td>{{ item.grade }}</td>
+                <td>{{ item.pcs }}</td>
+                <td>{{ item.cut }}</td>
+                <td>{{ item.mtrs }}</td>
+                <td>{{ item.rate }}</td>
+                <td>{{ item.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Back Button (optional) -->
+    <a href="{% url 'list_purchase_orders' %}" class="btn btn-secondary">Back</a>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><head>
+  {% load static %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,300;1,400&family=Montserrat:wght@100&family=Poppins:ital,wght@0,100;1,100&family=Roboto:wght@100;300&family=Zen+Antique&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ganesh LMS</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+<body align="left" style="align:left;">
+  {% include 'library/header.html' %}
+
+
+
+<div align='center' class="container mt-3" style="width:95%;font-size:14px;">
+  {% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show mx-3" role="alert">
+      {{message}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+  {% endif %}
+    <form align='left' class="card p-5 mt-5"  method="post" style="width:600px;background-color:;" autocomplete="off">
+    {% csrf_token %}
+    <tr>
+      <th><label for="id_username" class="form-label"> <h4> User Login </h4></label></th>
+      <td>
+
+
+
+      </td>
+    </tr>
+    <tr>
+      <th><label for="id_username" class="form-label">Username:</label></th>
+      <td>
+
+        <input type="text" class="form-control" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+
+
+      </td>
+    </tr>
+
+    <tr>
+      <th><label for="id_password" class="form-label">Password:</label></th>
+      <td>
+
+        <input type="password" class="form-control" name="password" autocomplete="current-password" required id="id_password">
+
+
+
+
+      </td>
+    </tr><br>
+    <input class="form-control" style="width:150px;" type="submit" value="Submit">
+    <br>
+
+    <a href="{% url 'register_user' %}" class="text-reset text-decoration-none" style="color:grey;">Don't have an account Signup Here</a>
+  </form>
+
+
+</div>
+
+<!--
+<div class="container">
+        <div class="row">
+            <div class="offset-lg-3 col-lg-6 offset-md-1 col-md-10 col-12 mt-3">
+                <div class="card mt-xl-12 mt-lg-12 mt-12 mb-xl-3 mb-lg-3 mb-2 shadow">
+                    <div class="card-body p-6">
+                        <div class="mb-4">
+                            <h2 class="mb-3 text-center">Login</h2>
+                            </div>
+                        <form method="POST">
+                          {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password">
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary ">
+                                    Login
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+-->
+
+
+<br><br>
+
+</body>
+</html>

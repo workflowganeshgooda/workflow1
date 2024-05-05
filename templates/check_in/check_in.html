@@ -1,0 +1,32 @@
+<!-- check_in.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Check-In</title>
+</head>
+<body>
+    <h1>User Check-In</h1>
+    {% if checked_in_today %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="check_out_selfie">Check-Out Selfie:</label>
+            <input type="file" name="check_out_selfie" accept="image/*" capture="camera" required>
+            <br><br>
+            <button type="submit">Check-Out</button>
+        </form>
+    {% else %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+            <br><br>
+            <label for="check_in_selfie">Check-In Selfie:</label>
+            <input type="file" name="check_in_selfie" accept="image/*" capture="camera" required>
+            <br><br>
+            <button type="submit">Check-In</button>
+        </form>
+    {% endif %}
+</body>
+</html>

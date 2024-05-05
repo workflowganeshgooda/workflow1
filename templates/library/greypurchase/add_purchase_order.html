@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Grey Purchase Order</title>
+    <!-- Add your CSS and Bootstrap links here -->
+</head>
+<body>
+    <h1>Add Grey Purchase Order</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Entry Number -->
+        <div class="form-group">
+            <label for="entry_number">Entry Number</label>
+            <input type="text" class="form-control" id="entry_number" name="entry_number" required>
+        </div>
+
+        <!-- Entry Date -->
+        <div class="form-group">
+            <label for="entry_date">Entry Date</label>
+            <input type="date" class="form-control" id="entry_date" name="entry_date" required>
+        </div>
+
+        <!-- Reference Number -->
+        <div class="form-group">
+            <label for="ref_number">Reference Number</label>
+            <input type="text" class="form-control" id="ref_number" name="ref_number" required>
+        </div>
+
+        <!-- Reference Date -->
+        <div class="form-group">
+            <label for="ref_date">Reference Date</label>
+            <input type="date" class="form-control" id="ref_date" name="ref_date" required>
+        </div>
+
+        <!-- Party Name -->
+        <div class="form-group">
+            <label for="party_name">Party Name</label>
+            <select class="form-control" id="party_name" name="party_name" required>
+                <!-- Populate this select with options from your database -->
+                <option value="1">Party Name 1</option>
+                <option value="2">Party Name 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <!-- Process -->
+        <div class="form-group">
+            <label for="process">Process</label>
+            <select class="form-control" id="process" name="process" required>
+                <!-- Populate this select with options from your database -->
+                <option value="1">Process 1</option>
+                <option value="2">Process 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <!-- Delivery At -->
+        <div class="form-group">
+            <label for="delivery_at">Delivery At</label>
+            <select class="form-control" id="delivery_at" name="delivery_at" required>
+                <!-- Populate this select with options from your database -->
+                <option value="1">Delivery Location 1</option>
+                <option value="2">Delivery Location 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <!-- Broker -->
+        <div class="form-group">
+            <label for="broker">Broker</label>
+            <select class="form-control" id="broker" name="broker" required>
+                <!-- Populate this select with options from your database -->
+                <option value="1">Broker 1</option>
+                <option value="2">Broker 2</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <!-- Remarks -->
+        <div class="form-group">
+            <label for="remarks">Remarks</label>
+            <textarea class="form-control" id="remarks" name="remarks" rows="4" required></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Navigation Menu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style media="screen">
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          display: none;
+        }
+     /* General Styles */
+     body {
+      background-color: black;
+      margin: 0;
+      font-family: Arial, sans-serif;   
+    }
+        
+        /* The side navigation menu */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 60px;
+            transition: 0.5s;
+        }
+        
+        /* Navigation Links */
+        .sidenav a {
+            padding: 8px 8px 8px 32px; /* Adjust as needed */
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+            text-align: left; /* Align text to the left */
+        }
+        
+        /* Hover Effect */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+        
+        /* Close Button */
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        
+        /* Page Content */
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+        }
+        
+        /* Dropdown Container */
+        .dropdown-container {
+            display: none;
+            padding-left: 32px;
+        }
+        
+        /* Dropdown Button */
+        .dropdown-btn {
+            background-color: transparent;
+            border: none;
+            color: #818181;
+            padding: 8px 8px 8px 32px;
+            font-size: 25px;
+            text-decoration: none;
+            display: block;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        /* Dropdown Button Hover */
+        .dropdown-btn:hover {
+            color: #f1f1f1;
+        }
+        
+        .open-icon {
+            color: #7f7f7f;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+            position: fixed; /* Fixed position */
+            top: 20px; /* Adjust the top position as needed */
+            left: 20px; /* Align to the left side */
+            z-index: 2; /* Ensure it's above other elements */
+        }
+        
+        /* Hover Effect for Open Icon */
+        .open-icon:hover {
+            color: #45a049;
+        }
+    </style>
+</head>
+<body align="left" style="background-color:black; background-size:100%; height: 100%;">
+    <!-- Side Navigation Menu -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        {% if not user.is_authenticated %}
+        <a class="navbar-brand btn bi-person-circle text-white" href="{% url 'login' %}" > Login</a>
+        <a class="navbar-brand btn bi-journal-check text-white" href="{% url 'register_user' %}" > Register</a>
+        {% endif %}
+        {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+        <a class="navbar-brand btn bi-house text-white" href="/dashboard" > Dashboard</a>
+        {% endif %}
+        <!-- Dropdown Button -->
+        <button class="dropdown-btn nav-link navbar-brand text-white" onclick="toggleDropdown()">e-Support <i class="fa fa-caret-down"></i></button>
+        <!-- Dropdown Container -->
+        <div class="dropdown-container" id="dropdownContainer"> <!-- No style attribute here -->
+            <a class="dropdown-item"  href="/soft_issue/add_soft_issue/"> Raise Request </a>
+            <a href="/soft_issue/view_soft_issue/">View Requests</a>
+            <a href="#">Link 3</a>
+        </div>
+
+        <a href="#">Services</a>
+        <a href="#">Clients</a>
+        <a href="#">Contact</a>
+        <a class="navbar-brand btn text-white bi bi-box-arrow-right" href="{% url 'logout' %}"> Logout</a>
+        {% endif %}
+    </div>
+    
+    <!-- Open Button -->
+    <div style="display:flex; justify-content: space-between;background-color:#111;">
+        <span>
+            <a href="#" class="open-icon" onclick="openNav()">
+                <i class="fas fa-bars"></i>
+            </a>
+        </span>
+        <span>
+            <a href="/">
+                <img src="{% static 'img/lavn_techwfw.png' %}" class="img-fluid mt-2" alt="Responsive image" width="200px">
+            </a>
+        </span>
+    </div>
+      
+    <!-- Main Content -->
+    <div id="main">
+        <!-- Page Content Goes Here -->
+    </div>
+    
+    <!-- JavaScript to Open/Close Navigation Menu -->
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+            document.getElementById("dropdownContainer").style.display = "none"; // Hide the dropdown container
+        }
+        
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+        
+        function toggleDropdown() {
+            var dropdownContainer = document.getElementById("dropdownContainer");
+            if (dropdownContainer.style.display === "block") {
+                dropdownContainer.style.display = "none"; // Hide the dropdown container if it's currently visible
+            } else {
+                dropdownContainer.style.display = "block"; // Show the dropdown container if it's currently hidden
+            }
+        }
+        
+        // Initially collapse the dropdown on page load
+        window.onload = function() {
+            var dropdownContainer = document.getElementById("dropdownContainer");
+            dropdownContainer.style.display = "none";
+        };
+    </script>
+</body>
+</html>

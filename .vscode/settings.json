@@ -1,0 +1,7 @@
+{
+    "editor.guides.bracketPairs": "active",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorBlinking": "smooth",
+    "editor.smoothScrolling": true,
+    "terminal.integrated.smoothScrolling": true
+}

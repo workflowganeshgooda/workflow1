@@ -1,0 +1,67 @@
+<!-- check_in_data.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check-In Data</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .modal-dialog {
+            max-width: 800px;
+        }
+        .modal-dialog img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Check-In Data</h1>
+        <table class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Check-In Time</th>
+                    <th>Selfie</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for check_in in check_ins %}
+                <tr>
+                    <td>{{ check_in.user }}</td>
+                    <td>{{ check_in.check_in_time }}</td>
+                    <td>
+                        <button type="button" class="btn btn-link view-selfie" data-toggle="modal" data-target="#selfieModal{{ check_in.id }}">
+                            View Selfie
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="selfieModal{{ check_in.id }}" tabindex="-1" role="dialog" aria-labelledby="selfieModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="selfieModalLabel">Selfie</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <img src="{{ check_in.selfie.url }}" class="img-fluid" alt="Selfie">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

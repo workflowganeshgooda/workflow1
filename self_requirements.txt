@@ -1,0 +1,45 @@
+1.Install Python 3.11.5 from offical web site
+Restart PC
+--- Check Version ---
+python --version 
+
+------------------------------------
+2. Install Django
+pip install django on main cmd
+--- Check Version --
+python -m django --version
+
+------------------------------------
+3. Install MYSQL
+and configure
+
+------------------------------------
+4. Install
+mysql -u root -p (to check sql server installed or not)
+
+pip install mysqlclient
+
+------------------------------------
+5. Install 
+pip install auditlog
+(for user audit log)
+------------------------------------
+
+6. Install
+pip install django-import-export
+(To export data to excel and more...)
+
+------------------------------------
+
+7.Install
+pip install djangorestframework
+(for api creation )
+
+------------------------------------
+8.Install
+pip install reportlab
+(to generate export pdf)
+------------------------------------
+9. Install
+pip install pipreqs
+to generate requirements.txt

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  {% load static %}
+  <style media="screen">
+    nav {
+      color: white;
+    }
+
+    .sliding {
+      /* position: absolute; */
+      top: 50%;
+      white-space: nowrap;
+      font-size: 12rem;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      line-height: 20px;
+      overflow: hidden;
+      font-family: "verdana";
+      /* padding-top: 40px; */
+      animation: animate 20s linear infinite;
+      
+    }
+
+    @keyframes animate {
+      0% {
+        transform: translate(0, -0%);
+      }
+
+      100% {
+        transform: translate(-50%, -50%);
+      }
+    }
+  </style>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LAVN TECH : WORKFLOW</title>
+  
+</head>
+
+
+{% if is_desktop %}
+{% include 'library/header1.html' %}
+{% else %}
+{% include 'library/header.html' %}
+{% endif %}
+<body style="background-color:black; text-align: center;" class="bg-black text-white">
+
+
+
+  <div class="align:center">
+    <div style="font-size: large; font:verdana; text-align: center;" class="sliding">
+      <script>
+
+        //Time of day message script- by javascriptkit.com
+        //Visit JavaScript Kit (http://javascriptkit.com) for script
+        //Credit must stay intact for use
+
+        var Digital = new Date();
+        var hours = Digital.getHours();
+        console.log(hours);
+        //Configure message below to your own.
+        {% if user.is_authenticated %}
+
+        if (hours >= 5 && hours <= 11) //MESSAGE FOR MORNING
+          document.write('<b>Hello! <span style="color:#650070;">{{user}}</span>  Good morning, Welcome to LAVN TECH</b>')
+        else if (hours == 12) //MESSAGE FOR NOON
+          document.write('<b>Hello! <span style="color:#650070;">{{user}}</span>  It is high noon. Welcome to LAVN TECH</b>')
+        else if (hours >= 13 && hours <= 17) //MESSAGE FOR AFTERNOON
+          document.write('<b>Hello! <span style="color:#650070;">{{user}}</span>  Good afternoon, Welcome to LAVN TECH.</b>')
+        else if (hours >= 17 && hours <= 20) //MESSAGE FOR EVENING (6pm-8pm)
+          document.write('<b>Hello! <span style="color:#650070;">{{user}}</span> Good evening. Hope you\'re enjoying the gentle breeze</b>')
+        else if (hours >= 21 && hours <= 11) //MESSAGE FOR NIGHT (9pm-11pm)
+          document.write('<b>Glad to see you this time of the night.</b>')
+        else //MESSAGE FOR LATE NIGHT, EARLY MORNING (12pm-4am)
+          document.write('<b> Hello! <span style="color:#650070;">{{user}}</span> Welcome to LAVN TECH Thanks for visit our site over sleep!</b>')
+        {% endif %}
+
+      </script>
+
+    </div>
+    <img src="{% static 'img/task.jpg' %}" style="width:100%" class="img-fluid" alt="Responsive image">
+   
+  </div>
+  </table>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</html>
+<div align="center" style="text-align:center;">
+          
+  {% include 'library/footer.html' %}
+  
+  <div/>   
